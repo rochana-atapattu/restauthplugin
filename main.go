@@ -6,7 +6,6 @@ import (
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/vault/api"
 	"github.com/hashicorp/vault/sdk/plugin"
-	"github.com/rochana-atapattu/restauthplugin/rest"
 )
 
 func main() {
@@ -18,7 +17,7 @@ func main() {
 	tlsProviderFunc := api.VaultPluginTLSProvider(tlsConfig)
 
 	if err := plugin.Serve(&plugin.ServeOpts{
-		BackendFactoryFunc: rest.Factory,
+		BackendFactoryFunc: Factory,
 		TLSProviderFunc:    tlsProviderFunc,
 	}); err != nil {
 		logger := hclog.New(&hclog.LoggerOptions{})
